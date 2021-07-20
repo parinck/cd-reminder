@@ -1,13 +1,10 @@
 function _cd_remind() {
+    # https://linuxize.com/post/bash-check-if-file-exists/
     local CD_REMINDER_FILE=.cd-reminder
     if [ -f "$CD_REMINDER_FILE" ]; then
-        echo;
-        echo "💡cd-reminder:";
+        echo "$(tput bold)$(tput setaf 2)💡cd-reminder:$(tput sgr0)";
         echo "--------------"
         cat $CD_REMINDER_FILE 1>&2;
-        echo;
-    #else 
-    #    echo "$FILE does not exist."
     fi
 }
 
