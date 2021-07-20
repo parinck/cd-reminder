@@ -3,7 +3,7 @@ function _cd_remind() {
     if [ -f "$CD_REMINDER_FILE" ]; then
         echo;
         echo "💡cd-reminder:";
-        echo "------------"
+        echo "--------------"
         cat $CD_REMINDER_FILE 1>&2;
         echo;
     #else 
