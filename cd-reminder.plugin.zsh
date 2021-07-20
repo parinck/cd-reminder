@@ -1,11 +1,21 @@
-# calls the builtin cd command, and then optionally cat's the .cd-reminder file
-# in the directory if it exists
-reminder_z() {
-    z "$@" && { [[ ! -a .cd-reminder ]] || cat .cd-reminder 1>&2; }
+function _cd_remind() {
+    local CD_REMINDER_FILE=.cd-reminder
+    if [ -f "$CD_REMINDER_FILE" ]; then
+        echo "💡CD reminder!";
+        cat $CD_REMINDER_FILE 1>&2;
+    else 
+        echo "$FILE does not exist."
+    fi
 }
 
-reminder_cd() {
-    builtin cd "$@" && { [[ ! -a .cd-reminder ]] || cat .cd-reminder 1>&2; }
+# calls the builtin cd command, and then optionally cat's the .cd-reminder file
+# in the directory if it exists
+function reminder_z() {
+    z "$@" && _cd_remind;
+}
+
+function reminder_cd() {
+    builtin cd "$@" && _cd_remind;
 }
 
 # Either creates an empty .cd-reminder file, or if an argument is included
