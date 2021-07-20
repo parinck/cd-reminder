@@ -1,5 +1,9 @@
 # calls the builtin cd command, and then optionally cat's the .cd-reminder file
 # in the directory if it exists
+reminder_z() {
+    z "$@" && { [[ ! -a .cd-reminder ]] || cat .cd-reminder 1>&2; }
+}
+
 reminder_cd() {
     builtin cd "$@" && { [[ ! -a .cd-reminder ]] || cat .cd-reminder 1>&2; }
 }
@@ -16,8 +20,6 @@ new_reminder() {
     fi
 }
 
-alias cd=reminder_cd
-
 _insert_git_exclude() {
   echo ".cd-reminder" >> $(git config --global core.excludesfile)
 }
@@ -31,3 +33,6 @@ git_exclude_cd_reminder() {
     _insert_git_exclude
   fi
 }
+
+alias cd=reminder_cd
+alias z=reminder_z
