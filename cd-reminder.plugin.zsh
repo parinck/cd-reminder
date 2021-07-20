@@ -1,10 +1,12 @@
 function _cd_remind() {
     local CD_REMINDER_FILE=.cd-reminder
     if [ -f "$CD_REMINDER_FILE" ]; then
+        echo;
         echo "💡CD reminder!";
         cat $CD_REMINDER_FILE 1>&2;
-    else 
-        echo "$FILE does not exist."
+        echo;
+    #else 
+    #    echo "$FILE does not exist."
     fi
 }
 
